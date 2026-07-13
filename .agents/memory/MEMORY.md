@@ -1,0 +1,3 @@
+- [Mongoose gotchas](mongoose-gotchas.md) — String `required:true` also rejects `""`; singleton docs need `_id: String` explicitly.
+- [Query hook enabled option](query-hook-enabled-option.md) — generated TanStack hooks need `queryKey` alongside `enabled` or TS fails.
+- [Vercel + pnpm workspace Express/Vite](vercel-serverless-express-monorepo.md) — wrap the Express app as an `api/` serverless function, isolate its tsconfig from the frontend's.

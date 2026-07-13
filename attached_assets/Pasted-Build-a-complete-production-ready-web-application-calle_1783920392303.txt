@@ -1,0 +1,240 @@
+Build a complete production-ready web application called **Nutterx Technologies VCF Registration**.
+
+Tech Stack:
+- React + Vite + TypeScript
+- Tailwind CSS
+- Express.js backend
+- MongoDB Atlas with Mongoose
+- Deployable on Vercel
+
+IMPORTANT:
+Do NOT create a MongoDB Atlas cluster.
+Do NOT generate a MongoDB connection string.
+I will provide my own MongoDB Atlas connection string later.
+
+The application must read the MongoDB connection from the environment variable:
+
+MONGODB_URI
+
+The project must work immediately after I paste my own MONGODB_URI into the environment variables.
+
+──────────────────────────────
+
+HOME PAGE
+
+Create a modern, premium, responsive landing page.
+
+Company Name:
+Nutterx Technologies
+
+Title:
+VCF Registration
+
+Description:
+Register your phone number to download the official Nutterx Technologies contact card.
+
+Use a premium blue, white and black theme with smooth animations and glassmorphism cards.
+
+──────────────────────────────
+
+REGISTRATION FORM
+
+Fields:
+
+• Full Name (Required)
+
+• Phone Number (Required)
+
+Phone Number Rules:
+
+- Country code is mandatory.
+- Accept only E.164 format.
+- Examples:
++254712345678
++255712345678
++256712345678
++255784567890
+- Automatically remove spaces.
+- Reject invalid numbers.
+- Store numbers exactly as entered in E.164 format.
+- Phone numbers must always be unique.
+- Duplicate registrations must never be allowed.
+
+Display:
+
+"This phone number is already registered."
+
+──────────────────────────────
+
+DATABASE
+
+Use MongoDB Atlas.
+
+Read connection from:
+
+MONGODB_URI
+
+Create a Registration model with:
+
+- _id
+- name
+- phone (unique)
+- createdAt
+
+Create a unique index on phone.
+
+──────────────────────────────
+
+AFTER SUCCESSFUL REGISTRATION
+
+Display:
+
+✅ Registration Successful
+
+Thank you for registering with Nutterx Technologies.
+
+Show a large button:
+
+Download Contact
+
+When clicked, generate and download:
+
+NUTTERX.vcf
+
+The VCF should contain the company details stored in the admin settings.
+
+──────────────────────────────
+
+VCF SETTINGS
+
+The administrator should be able to configure:
+
+- Company Name
+- Contact Name
+- Phone Number
+- Email
+- Website
+- Address
+- WhatsApp Number
+
+The downloaded VCF should always use these settings.
+
+Filename must always be:
+
+NUTTERX.vcf
+
+──────────────────────────────
+
+ADMIN PANEL
+
+Create a secure admin dashboard.
+
+Login credentials must come from environment variables:
+
+ADMIN_USERNAME
+ADMIN_PASSWORD
+SESSION_SECRET
+
+Dashboard Features:
+
+- Total registrations
+- Search by name
+- Search by phone
+- Delete registration
+- Export registrations as CSV
+- View latest registrations
+- Update VCF information
+- Change company logo
+- View registration statistics
+
+──────────────────────────────
+
+API ROUTES
+
+POST /api/register
+
+GET /api/admin/registrations
+
+DELETE /api/admin/registrations/:id
+
+GET /api/download-vcf
+
+GET /api/admin/settings
+
+PUT /api/admin/settings
+
+GET /api/admin/stats
+
+──────────────────────────────
+
+SECURITY
+
+- Validate all inputs.
+- Prevent duplicate phone numbers.
+- Sanitize user input.
+- Use Helmet.
+- Enable CORS.
+- Rate limit registration endpoint.
+- Proper server-side validation.
+- Handle errors gracefully.
+
+──────────────────────────────
+
+UI
+
+Build a premium user interface using Tailwind CSS.
+
+Include:
+
+- Glassmorphism cards
+- Smooth animations
+- Loading spinners
+- Toast notifications
+- Dark mode
+- Mobile-first responsive design
+- Professional typography
+- Modern buttons and icons
+
+──────────────────────────────
+
+DEPLOYMENT
+
+The application must be fully compatible with Vercel.
+
+Do not hardcode secrets.
+
+Use only environment variables:
+
+MONGODB_URI
+ADMIN_USERNAME
+ADMIN_PASSWORD
+SESSION_SECRET
+
+──────────────────────────────
+
+README
+
+Generate a complete README.md explaining:
+
+- Installation
+- Running locally
+- Setting up MongoDB Atlas
+- Adding environment variables
+- Deploying to Vercel
+- Updating VCF information
+- Managing registrations
+
+──────────────────────────────
+
+CODE QUALITY
+
+- Use TypeScript throughout.
+- Use Mongoose for MongoDB.
+- Create reusable components.
+- Modular folder structure.
+- Clean architecture.
+- Production-ready code.
+- Proper comments.
+- Optimized performance.
+
+The final project should be immediately deployable to Vercel after I provide my own MongoDB Atlas connection string in the MONGODB_URI environment variable.
