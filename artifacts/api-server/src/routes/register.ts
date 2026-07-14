@@ -5,6 +5,7 @@ import { RegistrationModel } from "../models/Registration";
 import { getOrCreateSettings } from "../models/VcfSettings";
 import { normalizeAndValidatePhone } from "../lib/phone";
 import { buildVcf } from "../lib/vcf";
+import { syncExternalRegistrations } from "../lib/syncExternalRegistrations";
 import {
   RegisterPhoneBody,
   RegisterPhoneResponse,
@@ -87,6 +88,7 @@ router.get(
   "/download-vcf",
   async (_req: Request, res: Response): Promise<void> => {
     await connectMongo();
+    await syncExternalRegistrations();
     const settings = await getOrCreateSettings();
     const total = await RegistrationModel.countDocuments();
 
@@ -109,6 +111,7 @@ router.get(
   "/progress",
   async (_req: Request, res: Response): Promise<void> => {
     await connectMongo();
+    await syncExternalRegistrations();
     const settings = await getOrCreateSettings();
     const total = await RegistrationModel.countDocuments();
 

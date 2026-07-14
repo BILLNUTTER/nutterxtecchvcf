@@ -4,6 +4,7 @@ import { connectMongo } from "../lib/mongoose";
 import { RegistrationModel } from "../models/Registration";
 import { getOrCreateSettings, VcfSettingsModel, SETTINGS_ID } from "../models/VcfSettings";
 import { requireAdmin } from "../middlewares/adminAuth";
+import { syncExternalRegistrations } from "../lib/syncExternalRegistrations";
 import {
   AdminLoginBody,
   GetAdminSessionResponse,
@@ -93,6 +94,7 @@ router.get(
     }
 
     await connectMongo();
+    await syncExternalRegistrations();
 
     const page = parsed.data.page ?? 1;
     const limit = parsed.data.limit ?? 20;
@@ -132,6 +134,7 @@ router.get(
   requireAdmin,
   async (_req: Request, res: Response): Promise<void> => {
     await connectMongo();
+    await syncExternalRegistrations();
     const items = await RegistrationModel.find().sort({ createdAt: -1 });
 
     const escapeCsv = (value: string): string => {
@@ -187,6 +190,7 @@ router.get(
   requireAdmin,
   async (_req: Request, res: Response): Promise<void> => {
     await connectMongo();
+    await syncExternalRegistrations();
 
     const now = new Date();
     const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
