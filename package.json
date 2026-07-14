@@ -10,8 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@replit/connectors-sdk": "^0.4.1",
-    "@workspace/api-server": "workspace:*"
+    "@replit/connectors-sdk": "^0.4.1"
   },
   "devDependencies": {
     "@types/node": "catalog:",

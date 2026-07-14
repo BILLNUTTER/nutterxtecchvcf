@@ -1,10 +1,10 @@
 {
-  "extends": "../artifacts/api-server/tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "composite": false,
     "incremental": false,
     "noEmit": true,
-    "rootDir": ".."
+    "types": ["node"]
   },
-  "include": ["./index.ts", "../artifacts/api-server/src/**/*"]
+  "include": ["./index.ts"]
 }

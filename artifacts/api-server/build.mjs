@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
 import esbuildPluginPino from "esbuild-plugin-pino";
-import { rm } from "node:fs/promises";
+import { rm, writeFile } from "node:fs/promises";
 
 // Plugins (e.g. 'esbuild-plugin-pino') may use `require` to resolve dependencies
 globalThis.require = createRequire(import.meta.url);
@@ -15,7 +15,10 @@ async function buildAll() {
   await rm(distDir, { recursive: true, force: true });
 
   await esbuild({
-    entryPoints: [path.resolve(artifactDir, "src/index.ts")],
+    entryPoints: [
+      path.resolve(artifactDir, "src/index.ts"),
+      path.resolve(artifactDir, "src/serverless.ts"),
+    ],
     platform: "node",
     bundle: true,
     format: "esm",
@@ -118,6 +121,20 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
     `,
     },
   });
+
+  // Hand-written declarations for the serverless bundle, co-located next to
+  // its compiled output so TS's module resolution (bundler/node16/nodenext
+  // all honor sibling .d.mts files) picks them up automatically for any
+  // consumer that imports "./dist/serverless.mjs" — notably the repo-root
+  // `api/index.ts` Vercel function, which imports the compiled bundle
+  // instead of the TypeScript source (see serverless.ts for why).
+  await writeFile(
+    path.resolve(distDir, "serverless.d.mts"),
+    `export declare const app: (req: unknown, res: unknown) => void;
+export declare function connectMongo(): Promise<unknown>;
+export default app;
+`,
+  );
 }
 
 buildAll().catch((err) => {
