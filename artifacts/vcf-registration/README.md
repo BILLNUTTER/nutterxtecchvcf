@@ -74,8 +74,8 @@ This app is also configured to deploy as a single Vercel project (frontend + API
 3. Add these environment variables in the Vercel dashboard (Project → Settings → Environment Variables): `MONGODB_URI`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `SESSION_SECRET`.
 4. Deploy. Vercel runs the monorepo's default build (`pnpm run build`, which builds every workspace package), and the repo-root `vercel.json`:
    - Points `outputDirectory` at `artifacts/vcf-registration/dist/public` (the Vite build output).
-   - Deploys `artifacts/vcf-registration/api/index.ts` as a serverless function that wraps the same Express app used on Replit, so registration, admin, and VCF download endpoints all work identically.
-   - Rewrites `/api/*` to that function and everything else to `index.html`, so client-side routing (including the `?admin=true` admin entry point) works on refresh/direct links.
+   - Deploys the repo-root `api/index.ts` as a serverless function that wraps the same Express app used on Replit, so registration, admin, and VCF download endpoints all work identically at `/api/*`. (Vercel's zero-config builder only detects functions in a top-level `api/` directory, so this file lives at the repo root rather than inside the artifact folder, importing `@workspace/api-server` as a root-level workspace dependency.)
+   - Rewrites everything except `/api/*` to `index.html`, so client-side routing (including the `?admin=true` admin entry point) works on refresh/direct links.
 
 No code changes are needed between the two targets — the same Express app and React frontend run on both.
 

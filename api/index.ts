@@ -5,9 +5,14 @@
 // file adapts the same Express app (from @workspace/api-server) into a
 // single serverless function that handles every request under /api/*.
 //
+// Vercel's zero-config "Other" builder only detects Serverless Functions
+// inside a top-level `api/` directory (relative to the project root), so
+// this file must live at the repo root rather than nested inside the
+// vcf-registration artifact.
+//
 // `vercel.json` rewrites `/api/:path*` to this function, and mongoose's
 // connection is cached across warm invocations (see connectMongo).
-/// <reference path="../../api-server/src/types/session.d.ts" />
+/// <reference path="../artifacts/api-server/src/types/session.d.ts" />
 import type { IncomingMessage, ServerResponse } from "http";
 import app from "@workspace/api-server/src/app";
 import { connectMongo } from "@workspace/api-server/src/lib/mongoose";

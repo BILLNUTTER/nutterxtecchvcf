@@ -2,12 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "artifacts/vcf-registration/dist/public",
   "functions": {
-    "artifacts/vcf-registration/api/index.ts": {
+    "api/index.ts": {
       "maxDuration": 30
     }
   },
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/artifacts/vcf-registration/api" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
