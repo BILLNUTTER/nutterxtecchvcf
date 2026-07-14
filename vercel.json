@@ -2,7 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "artifacts/vcf-registration/dist/public",
   "functions": {
-    "artifacts/vcf-registration/api/index.ts": {}
+    "artifacts/vcf-registration/api/index.ts": {
+      "runtime": "nodejs20.x"
+    }
   },
   "rewrites": [
     { "source": "/api/:path*", "destination": "/artifacts/vcf-registration/api" },
