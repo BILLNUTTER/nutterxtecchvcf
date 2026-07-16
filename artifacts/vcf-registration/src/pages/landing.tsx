@@ -37,7 +37,7 @@ export default function LandingPage() {
   });
 
   const total = progress?.total ?? 0;
-  const target = progress?.target ?? 500;
+  const target = progress?.target ?? 90;
   const unlocked = progress?.unlocked ?? false;
   const remaining = Math.max(target - total, 0);
   const percent = Math.min((total / target) * 100, 100);
