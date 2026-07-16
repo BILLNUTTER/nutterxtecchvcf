@@ -11,7 +11,7 @@ const vcfSettingsSchema = new Schema({
   address: { type: String, default: "" },
   whatsapp: { type: String, default: "" },
   logoDataUrl: { type: String, default: null },
-  registrationTarget: { type: Number, default: 500, min: 1 },
+  registrationTarget: { type: Number, default: 90, min: 1 },
 });
 
 export const VcfSettingsModel = model("VcfSettings", vcfSettingsSchema);
